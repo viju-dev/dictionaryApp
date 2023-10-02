@@ -21,9 +21,18 @@ export const fetchWordDetails = (word) => {
     try {
       const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
       const data = await response.json();
+      console.log(!response.status);
 
-      dispatch({ type: FETCH_WORD_DETAILS_SUCCESS, payload: data });
-    } catch (error) {
+      console.log(data);
+      if(response.status != 200){
+        dispatch({ type: FETCH_WORD_DETAILS_FAILURE, payload: data.message+" "+data.resolution });
+      }
+      else{
+        dispatch({ type: FETCH_WORD_DETAILS_SUCCESS, payload: data });
+      }
+      
+    } catch (error) { // not catching error in local machine but catching on vercel
+    
       dispatch({ type: FETCH_WORD_DETAILS_FAILURE, payload: error.message });
     }
   };

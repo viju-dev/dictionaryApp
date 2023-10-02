@@ -3,14 +3,24 @@
 
     const Card = ()=> {
     
+        const historyyy = useSelector((state)=>state.history);
+        console.log("history",historyyy);
         const data = useSelector((state)=>state.wordDetails)
         const volume = data.data;
         // console.log(data)
-        console.log(volume)
+        console.log(volume,data)
 
         //  const histData = useSelector((state) => state.history);
     
         //  localStorage.setItem('histData', JSON.stringify(histData));
+        if(volume == null){
+            return (
+                <div className="cardArea">
+                    <h4>{data.error}</h4>
+
+                </div>
+            )
+        }
         return (
             <div className="cardArea">
             { 
