@@ -7,15 +7,16 @@ import History from './components/History';
 import { useState } from 'react';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
   return (
     <div className="App">
       {/* <header className="App-header">
       </header> */}
       <Header/>
       <Routes>
-          <Route path="/*"  element={<Search />} />
-          <Route path="/home"  element={<Search />} />
-          <Route path="/history"  element={<History />} />
+          <Route path="/*"  element={<Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}></Search>} />
+          <Route path="/home"  element={<Search  searchTerm={searchTerm} setSearchTerm={setSearchTerm}> </Search>} />
+          <Route path="/history"  element={<History setSearchTerm={setSearchTerm}></History>} />
           {/* <Header/>
       <Search/> */}
       </Routes>

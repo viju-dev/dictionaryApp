@@ -6,7 +6,7 @@ const Header = ()=> {
     return (
         <div className="headerBar">
             <div>
-            <h3>Dictionary App</h3>
+            <NavLink to="/" className="link"><h3>Dictionary App</h3> </NavLink> 
             </div>
             <div className="navBar">
             <NavLink to="/" className="link"> <h5>Home</h5> </NavLink> 

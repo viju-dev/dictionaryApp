@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "./Card";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -9,13 +9,19 @@ import Header from "./Header";
 import store from "../redux/store";
 import History from "./History";
 
-const Search = ()=> {
+const Search = ({searchTerm,setSearchTerm})=> {
     const dispatch = useDispatch();
-    const [searchTerm, setSearchTerm] = useState('');
+    // const [searchTerm, setSearchTerm] = useState('');
     let navigate = useNavigate();
 
 
     
+  useEffect(() => {
+   handleSearch();
+//    console.log(searchTerm);
+  }, []);
+  
+
     const handleSearch = ()=>{
         if (searchTerm.trim() !== '') {
             navigate(`/${searchTerm}`);
@@ -25,14 +31,15 @@ const Search = ()=> {
             // console.log(searchTerm);
             const existingData = JSON.parse(localStorage.getItem('histData')) || [];
             // Add the new item (searchTerm) to the existing data
-            existingData.push(searchTerm);
+            existingData.unshift(searchTerm);
+  
 
             // Store the updated data back in localStorage as a JSON string
             localStorage.setItem('histData', JSON.stringify(existingData));
           
           }
     };
-
+ 
     return (
         <div className="searchBar">
             <div className="searchArea">
